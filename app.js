@@ -11,16 +11,17 @@ const product = { id: 1, name: 'Bread', count: 1 };
 const Cart = function() {
 	this.products = [];
 }
-Cart.prototype.addProduct = function(product) {
-	if (this.products.find(product => product.id === product.id)) {
+Cart.prototype.addProduct = function(newProduct) {
+	if (this.products.find(product => product.id === newProduct.id)) {
 		return;
 	}
-	this.products.push(product);
+
+	this.products.push({ ...newProduct });
 }
 
 Cart.prototype.increaseAmount = function(id) {
 	this.products = this.products.map(product => {
-		if (product.id == id) {
+		if (product.id === id) {
 			product.count++;
 			return product;
 		}
@@ -31,7 +32,7 @@ Cart.prototype.increaseAmount = function(id) {
 Cart.prototype.decreaseAmount = function(id) {
 	this.products = this.products
 		.map(product => {
-			if (product.id == id) {
+			if (product.id === id) {
 				product.count--;
 				return product;
 			}
